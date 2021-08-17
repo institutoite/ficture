@@ -75,6 +75,7 @@
             $('table').on('click','.eliminar',function(e){
                 e.preventDefault();
                 var id=$(this).closest('tr').find('td').first().html();
+                console.log(id);
                 var fila=$(this).closest('tr');
                 Swal.fire({
                         title: 'Estas seguro(a) de eliminar este registro?',
@@ -89,7 +90,7 @@
                         }).then((result) => {
                         if (result.value) {
                             $.ajax({
-                                url : 'persona/eliminar/'+id,
+                                url : 'equipos/eliminar/'+id,
                                 type: 'DELETE',
                                 data:{
                                     id:id,

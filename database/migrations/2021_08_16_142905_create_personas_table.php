@@ -21,6 +21,8 @@ class CreatePersonasTable extends Migration
             $table->string('ci', 12);
             $table->string('expedido', 5);
             $table->string('telefono', 15);
+            $table->string('rol')->nullable();
+
             $table->timestamps();
         });
     }

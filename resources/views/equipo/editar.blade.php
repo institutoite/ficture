@@ -11,15 +11,17 @@
     
 @stop
 @section('content')
+
     <div class="card">
         <div class="card-header bg-success">
             EDITAR PERSONA
         </div>
+
         <div class="card-body">
-            <form method="post" action="{{route('persona.update',$persona)}}">
+            <form method="post" action="{{route('equipo.update',$equipo)}}">
                 {{ method_field('PATCH') }}
                 @csrf
-                @include('persona.form')
+                @include('equipo.form')
                 @include('include.boton')
             </form>
         </div>

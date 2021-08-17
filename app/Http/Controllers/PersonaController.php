@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Persona;
+use App\Models\Jugador;
+use App\Models\Arbitro;
+use App\Models\Presidente;
 use Illuminate\Http\Request;
 use App\Http\Requests\storePersonaRuequest;
 
@@ -37,7 +40,8 @@ class PersonaController extends Controller
      */
     public function store(storePersonaRuequest $request)
     {
-        //dd($request->all());
+
+       // dd($request->all());
         $persona=new Persona;
         $persona->nombre = $request->nombre; //
         $persona->apellidop = $request->apellidop; //
@@ -45,7 +49,39 @@ class PersonaController extends Controller
         $persona->ci = $request->ci; //
         $persona->expedido = $request->expedido; //
         $persona->telefono = $request->telefono; //
+        $persona->rol = $request->rol; //
         $persona->save();
+
+        $rol=$persona->rol;
+
+        switch ($rol) {
+            case 'presidente':
+                $presidente= new Presidente;
+                $presidente->persona_id=$persona->id;
+                $presidente->save();
+                break;
+            
+            case 'jugador':
+                $jugador= new Jugador;
+                $jugador->persona_id=$persona->id;
+                $jugador->fechanacimiento=$request->fechanacimiento;
+                $jugador->equipo_id=$request->equipo_id;
+                $jugador->save();
+                break;
+            
+            case 'arbitro':
+                $arbitro= new Arbitro;
+                $arbitro->persona_id=$persona->id;
+                $arbitro->save();
+                break;
+            
+            default:
+                # code...
+                break;
+        }
+
+
+
         return redirect()->route('persona.index');
     }
 

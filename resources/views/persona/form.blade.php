@@ -81,3 +81,19 @@
         <div class="text-danger">{{$errors->first('telefono')}}</div>
     @enderror
 </div>
+
+<div class="form-floating mb-3 text-gray">
+    <select class="form-control @error('rol') is-invalid @enderror"  name="rol" id="rol">
+        <option value=""> Elija Papel</option>
+            @isset($persona)
+                <option value="presidente" @if($persona->rol == 'presidente') {{'selected'}} @endif>Presidente</option>
+                <option value="jugador" @if($persona->rol == 'jugador') {{'selected'}} @endif>Jugador</option>
+                <option value="arbitro" @if($persona->rol == 'arbitro') {{'selected'}} @endif>Arbitro</option>
+            @else 
+                <option value="presidente" @if(old('rol') == 'presidente') {{'selected'}} @endif>Presidente</option>
+                <option value="jugador" @if(old('rol') == 'docente') {{'selected'}} @endif>Jugador</option>
+                <option value="arbitro" @if(old('rol') == 'arbitro') {{'selected'}} @endif>Arbitro</option>
+            @endisset
+    </select>
+    <label for="rol">papel*</label>
+</div> 

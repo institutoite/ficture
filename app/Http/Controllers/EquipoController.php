@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Equipo;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreEquipoRequest;
 use Illuminate\Http\Request;
 
 class EquipoController extends Controller
@@ -35,16 +36,16 @@ class EquipoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreEquipoRequest $request)
     {
         $equipo=new Equipo;
-        $equipo->nombre=$request->get('nombre');
-        $equipo->direccion=$request->get('direccion');
-        $equipo->escudo=$request->get('escudo');
-        $equipo->colores=$request->get('colores');
-        $equipo->fundacion=$request->get('fundacion');
+        $equipo->nombre=$request->nombre;
+        $equipo->direccion=$request->direccion;
+        $equipo->escudo=$request->escudo;
+        $equipo->colores=$request->colores;
+        $equipo->fundacion=$request->fundacion;
         $equipo->save();
-        return redirect()->route('equipoGIT.index');
+        return redirect()->route('equipo.index');
     }
 
     /**
@@ -66,7 +67,8 @@ class EquipoController extends Controller
      */
     public function edit(Equipo $equipo)
     {
-        //
+        
+        return view('equipo.editar',compact('equipo'));
     }
 
     /**
@@ -78,7 +80,14 @@ class EquipoController extends Controller
      */
     public function update(Request $request, Equipo $equipo)
     {
-        //
+        $equipo = new Equipo;
+        $equipo->nombre = $request->nombre;
+        $equipo->direccion = $request->direccion;
+        $equipo->escudo = $request->escudo;
+        $equipo->colores = $request->colores;
+        $equipo->fundacion = $request->fundacion;
+        $equipo->save();
+        return redirect()->route('equipo.show',$equipo);
     }
 
     /**
@@ -89,6 +98,7 @@ class EquipoController extends Controller
      */
     public function destroy(Equipo $equipo)
     {
-        //
+        $equipo->delete();
+        return response()->json(['respuesta' => 'Eliminado correctamente']);
     }
 }
