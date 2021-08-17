@@ -1,27 +1,39 @@
 
 {{-- %%%%%%%%%%%%%%%%%%%%%%%%%%%  nombre %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% --}}
 <div class="form-floating mb-3">
-    <input type="text" class="form-control" id="nombre" name="nombre" value="{{old('nombre',$persona->nombre ?? '')}}">
+    <input type="text" class="form-control @error('nombre') is-invalid @enderror" id="nombre" name="nombre" value="{{old('nombre',$persona->nombre ?? '')}}">
     <label for="nombre">Nombre</label>
+    @error('nombre')
+        <div class="text-danger">{{$errors->first('nombre')}}</div>
+    @enderror
 </div>
 
 {{-- %%%%%%%%%%%%%%%%%%%%%%%%%%%  apellido paterno %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% --}}
 <div class="form-floating mb-3">
-    <input type="text" class="form-control" id="apellidop" name="apellidop">
+    <input type="text" class="form-control @error('apellidop') is-invalid @enderror" id="apellidop" name="apellidop" value="{{old('apellidop',$persona->apellidop ?? '')}}">
     <label for="apellidop">Apellido paterno</label>
+    @error('apellidop')
+        <div class="text-danger">{{$errors->first('apellidop')}}</div>
+    @enderror
 </div>
 
 
 {{-- %%%%%%%%%%%%%%%%%%%%%%%%%%%  apellido maternor %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% --}}
 <div class="form-floating mb-3">
-    <input type="text" class="form-control" id="apellidom" name="apellidom">
+    <input type="text" class="form-control @error('apellidom') is-invalid @enderror" id="apellidom" name="apellidom" value="{{old('apellidom',$persona->apellidom ?? '')}}">
     <label for="apellidom">Apellido materno</label>
+    @error('apellidom')
+        <div class="text-danger">{{$errors->first('apellidom')}}</div>
+    @enderror
 </div>
 
 {{-- %%%%%%%%%%%%%%%%%%%%%%%%%%%  carnet %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% --}}
 <div class="form-floating mb-3">
-    <input type="text" class="form-control" id="ci" name="ci">
+    <input type="text" class="form-control @error('ci') is-invalid @enderror" id="ci" name="ci" value="{{old('ci',$persona->ci ?? '')}}">
     <label for="ci">Carnet</label>
+    @error('ci')
+        <div class="text-danger">{{$errors->first('ci')}}</div>
+    @enderror
 </div>
 
 {{-- %%%%%%%%%%%%%%%%%%%%%%%%%%%  EXPEDIDO %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% --}}
@@ -29,7 +41,7 @@
                 <select class="form-control @error('expedido') is-invalid @enderror"  name="expedido" id="expedido">
                     <option value=""> Elija Expedido</option>
                         @isset($persona)
-                            <option value="SCZ" @if($persona->expedido == 'SCZ') {{'selected'}} @endif>Santa Cruz</option>
+                            <option value="SC" @if($persona->expedido == 'SC') {{'selected'}} @endif>Santa Cruz</option>
                             <option value="LPZ" @if($persona->expedido == 'LPZ') {{'selected'}} @endif>La Paz</option>
                             <option value="CBBA" @if($persona->expedido == 'CBBA') {{'selected'}} @endif>Cochabamba</option>
 
@@ -41,7 +53,7 @@
                             <option value="POT" @if($persona->expedido == 'POT') {{'selected'}} @endif>Potosí</option>
                             <option value="CHU" @if($persona->expedido == 'CHU') {{'selected'}} @endif>Chuquisaca</option>
                         @else 
-                            <option value="SCZ" @if(old('expedido') == 'SCZ') {{'selected'}} @endif>Santa Cruz</option>
+                            <option value="SC" @if(old('expedido') == 'SC') {{'selected'}} @endif>Santa Cruz</option>
                             <option value="LPZ" @if(old('expedido') == 'LPZ') {{'selected'}} @endif>La Paz</option>
                             <option value="CBBA" @if(old('expedido') == 'CBBA') {{'selected'}} @endif>Cochabamba</option>
 
@@ -57,9 +69,15 @@
                         
                 </select> 
                 <label for="expedido">Elija departamento de expedido</label>
+                @error('expedido')
+                    <div class="text-danger">{{$errors->first('expedido')}}</div>
+                @enderror
             </div>
 {{-- %%%%%%%%%%%%%%%%%%%%%%%%%%%  TELEFONO %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% --}}
 <div class="form-floating mb-3">    
-    <input type="text" class="form-control" id="telefono" name="telefono">
+    <input type="text" class="form-control @error('telefono') is-invalid @enderror" id="telefono" name="telefono" value="{{old('telefono',$persona->telefono ?? '')}}">
     <label for="telefono">telefono</label>
+    @error('telefono')
+        <div class="text-danger">{{$errors->first('telefono')}}</div>
+    @enderror
 </div>

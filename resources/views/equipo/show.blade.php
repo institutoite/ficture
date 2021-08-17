@@ -13,8 +13,8 @@
 @section('content')
     <div class="card">
         <div class="card-header bg-success">
-            MOSTRAR PERSONA
-            <a class="btn btn-warning float-right" href="{{route('persona.index')}}">Ver lista</a>
+            MOSTRAR EQUIPO
+            <a class="btn btn-warning float-right" href="{{route('equipo.index')}}">Ver lista</a>
         </div>
         <div class="card-body">
             <table id="personas" class="table table-striped table-hover">
@@ -27,27 +27,27 @@
                 <tbody>
                     <tr>
                         <td>ID</td>
-                        <td>{{$persona->id}}</td>
+                        <td>{{$equipo->id}}</td>
                     </tr>
                     <tr>
                         <td>NOMBRE</td>
-                        <td>{{$persona->nombre}}</td>
+                        <td>{{$equipo->nombre}}</td>
                     </tr>
                     <tr>
-                        <td>APELLIDO PATERNO</td>
-                        <td>{{$persona->apellidop}}</td>
+                        <td>DIRECCION</td>
+                        <td>{{$equipo->direccion}}</td>
                     </tr>
                     <tr>
-                        <td>APELLIDO MATERNO</td>
-                        <td>{{$persona->apellidom}}</td>
+                        <td>ESCUDO</td>
+                        <td>{{$equipo->escudo}}</td>
                     </tr>
                     <tr>
-                        <td>CARNET</td>
-                        <td>{{$persona->ci.' '.$persona->expedido}}</td>
+                        <td>COLORES</td>
+                        <td>{{$equipo->colores}}</td>
                     </tr>
                     <tr>
-                        <td>TELEFONO</td>
-                        <td>{{$persona->telefono}}</td>
+                        <td>FUNDACION</td>
+                        <td>{{$equipo->fundacion}}</td>
                     </tr>
                 </tbody>
             </table>                

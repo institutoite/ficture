@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Persona;
 use Illuminate\Http\Request;
+use App\Http\Requests\storePersonaRuequest;
 
 class PersonaController extends Controller
 {
@@ -34,7 +35,7 @@ class PersonaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(storePersonaRuequest $request)
     {
         //dd($request->all());
         $persona=new Persona;
@@ -77,9 +78,16 @@ class PersonaController extends Controller
      * @param  \App\Models\Persona  $persona
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Persona $persona)
+    public function update(storePersonaRuequest $request, Persona $persona)
     {
-        //
+        $persona->nombre= $request->nombre; //
+        $persona->apellidop= $request->apellidop; //
+        $persona->apellidom= $request->apellidom; //
+        $persona->ci= $request->ci; //
+        $persona->expedido= $request->expedido; //
+        $persona->telefono= $request->telefono; //
+        $persona->save();
+        return redirect()->route('persona.show',[$persona]);
     }
 
     /**
