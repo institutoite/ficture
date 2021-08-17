@@ -30,5 +30,6 @@ class PersonaSeeder extends Seeder
             'expedido' => "BEN",
             'telefono' => '74515555'
         ]);
+        Persona::factory()->count(100)->create();
     }
 }

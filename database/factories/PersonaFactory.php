@@ -22,7 +22,12 @@ class PersonaFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'nombre'=>$this->faker->name,
+            'apellidop'=>$this->faker->lastName(),
+            'apellidom'=> $this->faker->lastName(),
+            'ci'=>$this->faker->numberBetween($min = 55555555, $max = 99999999),
+            'expedido'=> $this->faker->randomElement(['LP','SC','PND','BEN','TAR','POT','CHU','CBBA','ORU']),
+            'telefono'=>$this->faker->randomElement(['78794545', '78791234', '78791235', '78791236', '78791237', '78791238']),
         ];
     }
 }

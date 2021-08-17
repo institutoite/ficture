@@ -25,7 +25,7 @@ class PersonaController extends Controller
      */
     public function create()
     {
-        //
+        return view('persona.create');
     }
 
     /**
@@ -36,7 +36,16 @@ class PersonaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //dd($request->all());
+        $persona=new Persona;
+        $persona->nombre = $request->nombre; //
+        $persona->apellidop = $request->apellidop; //
+        $persona->apellidom = $request->apellidom; //
+        $persona->ci = $request->ci; //
+        $persona->expedido = $request->expedido; //
+        $persona->telefono = $request->telefono; //
+        $persona->save();
+        return redirect()->route('persona.index');
     }
 
     /**
@@ -47,7 +56,7 @@ class PersonaController extends Controller
      */
     public function show(Persona $persona)
     {
-        //
+        return view('persona.show',compact('persona'));
     }
 
     /**
@@ -58,7 +67,7 @@ class PersonaController extends Controller
      */
     public function edit(Persona $persona)
     {
-        //
+        return view('persona.editar', compact('persona')); 
     }
 
     /**
@@ -81,6 +90,7 @@ class PersonaController extends Controller
      */
     public function destroy(Persona $persona)
     {
-        //
+        $persona->delete();
+        return response()->json(['respuesta'=>'Eliminado correctamente']);
     }
 }
