@@ -5,11 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Categoria extends Model
+class Campeonato extends Model
 {
     use HasFactory;
 
-    public function campeonatos(){
-        return $this->hasMany(Campeonato::class);
+
+    public function categoria(){
+        return $this->belongsTo(Categoria::class);
     }
 }

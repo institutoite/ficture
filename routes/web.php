@@ -51,8 +51,15 @@ Route::get('listar/canchas',[CanchaController::class, 'listar'])->name('cancha.l
 Route::post('canchas/guardar',[CanchaController::class, 'store'])->name('cancha.guardar');
 Route::delete('canchas/eliminar/{cancha}',[CanchaController::class, 'destroy'])->name('cancha.eliminar');
 
-
-
+/* %%%%%%%%%%%%%%%%%%%%%%%%%  RUTAS DE CAMPEONATO  %%%%%%%%%%%%%%%%%%%%%%%% */
+Route::get('campeonatos',[CampeonatoController::class, 'index'])->name('campeonato.index');
+Route::get('campeonatos/show/{campeonato}',[CampeonatoController::class, 'show'])->name('campeonato.show');
+Route::get('campeonatos/edit/{campeonato}',[CampeonatoController::class, 'edit'])->name('campeonato.edit');
+Route::patch('campeonatos/actualizar/{campeonato}',[CampeonatoController::class, 'update'])->name('campeonato.update');
+Route::get('campeonatos/create',[CampeonatoController::class, 'create'])->name('campeonato.create');
+Route::get('listar/campeonatos',[CampeonatoController::class, 'listar'])->name('campeonato.listar');
+Route::post('campeonatos/guardar',[CampeonatoController::class, 'store'])->name('campeonato.guardar');
+Route::delete('campeonatos/eliminar/{campeonato}',[CampeonatoController::class, 'destroy'])->name('campeonato.eliminar');
 
 
 Auth::routes();
