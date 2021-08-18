@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PersonaController;
 use App\Http\Controllers\EquipoController;
+use App\Http\Controllers\CanchaController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -28,14 +29,28 @@ Route::get('personas/create',[PersonaController::class, 'create'])->name('person
 Route::post('personas/guardar',[PersonaController::class, 'store'])->name('persona.guardar');
 Route::delete('persona/eliminar/{persona}',[PersonaController::class, 'destroy'])->name('persona.eliminar');
 
+
+
 /* %%%%%%%%%%%%%%%%%%%%%%%%%  RUTAS DE equipo  %%%%%%%%%%%%%%%%%%%%%%%% */
 Route::get('equipos',[EquipoController::class, 'index'])->name('equipo.index');
 Route::get('equipos/show/{equipo}',[EquipoController::class, 'show'])->name('equipo.show');
 Route::get('equipos/edit/{equipo}',[EquipoController::class, 'edit'])->name('equipo.edit');
 Route::patch('equipos/actualizar/{equipo}',[EquipoController::class, 'update'])->name('equipo.update');
 Route::get('equipos/create',[EquipoController::class, 'create'])->name('equipo.create');
+Route::get('listar/equipos',[EquipoController::class, 'listar'])->name('equipo.listar');
 Route::post('equipos/guardar',[EquipoController::class, 'store'])->name('equipo.guardar');
 Route::delete('equipos/eliminar/{equipo}',[EquipoController::class, 'destroy'])->name('equipo.eliminar');
+
+/* %%%%%%%%%%%%%%%%%%%%%%%%%  RUTAS DE canchas  %%%%%%%%%%%%%%%%%%%%%%%% */
+Route::get('canchas',[CanchaController::class, 'index'])->name('cancha.index');
+Route::get('canchas/show/{cancha}',[CanchaController::class, 'show'])->name('cancha.show');
+Route::get('canchas/edit/{cancha}',[CanchaController::class, 'edit'])->name('cancha.edit');
+Route::patch('canchas/actualizar/{cancha}',[CanchaController::class, 'update'])->name('cancha.update');
+Route::get('canchas/create',[CanchaController::class, 'create'])->name('cancha.create');
+Route::get('listar/canchas',[CanchaController::class, 'listar'])->name('cancha.listar');
+Route::post('canchas/guardar',[CanchaController::class, 'store'])->name('cancha.guardar');
+Route::delete('canchas/eliminar/{cancha}',[CanchaController::class, 'destroy'])->name('cancha.eliminar');
+
 
 
 

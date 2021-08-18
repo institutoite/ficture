@@ -9,15 +9,16 @@ use Illuminate\Http\Request;
 
 class EquipoController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    
     public function index()
     {
         $equipos=Equipo::all();
         return view('equipo.index',compact('equipos'));
+    }
+    public function listar()
+    {
+        $equipos=Equipo::all();
+        return response()->json($equipos);
     }
 
     /**

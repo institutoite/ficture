@@ -19,7 +19,7 @@ class PersonaSeeder extends Seeder
             'apellidop'=>"MALDONADO",
             'apellidom'=>"ROBLES",
             'ci'=>"4564215",
-            'expedido'=>"sc",
+            'expedido'=>"SC",
             'telefono'=>'74512221'
         ]);
         Persona::create([

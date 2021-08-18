@@ -41,7 +41,7 @@ class PersonaController extends Controller
     public function store(storePersonaRuequest $request)
     {
 
-       // dd($request->all());
+        //dd($request->all());
         $persona=new Persona;
         $persona->nombre = $request->nombre; //
         $persona->apellidop = $request->apellidop; //
@@ -58,6 +58,7 @@ class PersonaController extends Controller
             case 'presidente':
                 $presidente= new Presidente;
                 $presidente->persona_id=$persona->id;
+                
                 $presidente->save();
                 break;
             
@@ -65,7 +66,7 @@ class PersonaController extends Controller
                 $jugador= new Jugador;
                 $jugador->persona_id=$persona->id;
                 $jugador->fechanacimiento=$request->fechanacimiento;
-                $jugador->equipo_id=$request->equipo_id;
+                $jugador->equipo_id=$request->equipo;
                 $jugador->save();
                 break;
             

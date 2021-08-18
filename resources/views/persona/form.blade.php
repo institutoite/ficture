@@ -82,18 +82,35 @@
     @enderror
 </div>
 
+
 <div class="form-floating mb-3 text-gray">
     <select class="form-control @error('rol') is-invalid @enderror"  name="rol" id="rol">
-        <option value=""> Elija Papel</option>
+        <option value=""> Elija Rol</option>
             @isset($persona)
                 <option value="presidente" @if($persona->rol == 'presidente') {{'selected'}} @endif>Presidente</option>
                 <option value="jugador" @if($persona->rol == 'jugador') {{'selected'}} @endif>Jugador</option>
                 <option value="arbitro" @if($persona->rol == 'arbitro') {{'selected'}} @endif>Arbitro</option>
             @else 
                 <option value="presidente" @if(old('rol') == 'presidente') {{'selected'}} @endif>Presidente</option>
-                <option value="jugador" @if(old('rol') == 'docente') {{'selected'}} @endif>Jugador</option>
+                <option value="jugador" @if(old('rol') == 'jugador') {{'selected'}} @endif>Jugador</option>
                 <option value="arbitro" @if(old('rol') == 'arbitro') {{'selected'}} @endif>Arbitro</option>
             @endisset
     </select>
     <label for="rol">papel*</label>
 </div> 
+
+<div class="form-floating mb-3 d-none" id="campofechanacimiento">    
+    <input type="date" class="form-control @error('fechanacimiento') is-invalid @enderror" id="fechanacimiento" name="fechanacimiento" value="{{old('fechanacimiento',$persona->fechanacimiento ?? '')}}">
+    <label for="fechanacimiento">Fechanacimiento</label>
+    @error('fechanacimiento')
+        <div class="text-danger">{{$errors->first('fechanacimiento')}}</div>
+    @enderror
+</div>
+
+<div class="form-floating mb-3 text-gray d-none" id="campoequipo">
+    <select class="form-control @error('equipo') is-invalid @enderror"  name="equipo" id="equipo">
+        <option value=""> Elija equipo </option>
+            
+    </select>
+    <label for="rol" id="label">papel*</label>
+</div>

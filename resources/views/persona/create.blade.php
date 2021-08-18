@@ -32,15 +32,31 @@
             $("#rol" ).change(function() {
                 let rol=$(this).val();
                     if(rol=="jugador"){
-                        html=""; 
-                        html+="<div class='form-floating mb-3'>";    
-                        html+="<input type='date' class='form-control @error('fechanacimiento') is-invalid @enderror' id='fechanacimiento' name='fechanacimiento' value='{{old('fechanacimiento',$persona->fechanacimiento ?? '')}}'>";
-                        html+="<label for='fechanacimiento'>Fecha Nacimiento</label>";
-                        html+="@error('fechanacimiento')";
-                        html+="<div class='text-danger'>{{$errors->first('fechanacimiento')}}</div>";
-                        html+="@enderror";
-                        html+="</div>";
-                        $('#guardar').before(html);
+                        $('#campofechanacimiento').removeClass('d-none');
+
+                        $.ajax({
+                            url : '../listar/equipos',
+                            success : function(respuesta) {
+                                console.log(respuesta);
+                                $('#campoequipo').removeClass('d-none');
+                                for (let i = 0; i < respuesta.length; i++) {
+                                    $('#equipo').append("<option value='"+ respuesta[i].id +"'>"+ respuesta[i].nombre +"</option>");
+                                }
+                            },
+                            error : function(xhr, status) {
+                                console.log('fallé')
+                            },
+                        });
+
+                        
+                    }
+                    if(rol=="presidente"){
+                        $('#campoequipo').addClass('d-none');
+                        $('#campofechanacimiento').addClass('d-none');
+                    }
+                    if(rol=="arbitro"){
+                        $('#campoequipo').addClass('d-none');
+                        $('#campofechanacimiento').addClass('d-none');
                     }
             });
         });
