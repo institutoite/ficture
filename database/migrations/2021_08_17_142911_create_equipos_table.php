@@ -17,7 +17,7 @@ class CreateEquiposTable extends Migration
             $table->increments('id');
             $table->string('nombre', 45);
             $table->string('direccion', 1000);
-            $table->string('escudo', 100);
+            $table->string('escudo', 150);
             $table->string('colores', 50);
             $table->date('fundacion');
             $table->timestamps();

@@ -19,6 +19,7 @@ class DatabaseSeeder extends Seeder
             EquipoSeeder::class,
             CanchaSeeder::class,
             CategoriaSeeder::class,
+            ArbitroSeeder::class,
         ]);
     }
 }

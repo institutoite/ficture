@@ -9,6 +9,7 @@ class Campeonato extends Model
 {
     use HasFactory;
 
+    protected $dates=['fechainicio','fechafin'];
 
     public function categoria(){
         return $this->belongsTo(Categoria::class);

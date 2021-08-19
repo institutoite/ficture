@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Campeonato;
+use App\Models\Categoria;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
+use App\Http\Requests\StoreCampeonatoRequest;
 
 class CampeonatoController extends Controller
 {
@@ -14,7 +17,10 @@ class CampeonatoController extends Controller
      */
     public function index()
     {
-        //
+        $campeonatos=Campeonato::join('categorias','categorias.id','=','campeonatos.categoria_id')
+                                ->select('campeonatos.id','campeonato','fechainicio','fechafin','categorias.categoria')
+                                ->get();
+        return view('campeonato.index',compact('campeonatos'));
     }
 
     /**
@@ -24,7 +30,8 @@ class CampeonatoController extends Controller
      */
     public function create()
     {
-        //
+        $categorias=Categoria::all();
+        return view('campeonato.create',compact('categorias'));
     }
 
     /**
@@ -33,9 +40,18 @@ class CampeonatoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreCampeonatoRequest $request)
     {
-        //
+        // dd($request->all());
+        $campeonato=new Campeonato;
+        $campeonato->campeonato= $request->campeonato;
+        $campeonato->fechainicio= $request->fechainicio;
+        $campeonato->fechafin= $request->fechafin;
+        $campeonato->categoria_id= $request->categoria_id;
+        $campeonato->save();
+
+        return redirect()->route('campeonato.index');
+
     }
 
     /**
@@ -46,7 +62,12 @@ class CampeonatoController extends Controller
      */
     public function show(Campeonato $campeonato)
     {
-        //
+        $campeonatito=Campeonato::join('categorias','categorias.id','=','campeonatos.categoria_id')
+                    ->select('campeonatos.id','campeonatos.campeonato','fechainicio','fechafin','categorias.categoria')
+                    ->where('campeonatos.id','=',$campeonato->id)
+                    ->get()->first();
+        //dd($campeonatito);
+        return view('campeonato.show',compact('campeonatito'));
     }
 
     /**
@@ -57,7 +78,8 @@ class CampeonatoController extends Controller
      */
     public function edit(Campeonato $campeonato)
     {
-        //
+        $categorias=Categoria::all();
+        return view('campeonato.editar',compact('campeonato','categorias'));
     }
 
     /**
@@ -69,7 +91,14 @@ class CampeonatoController extends Controller
      */
     public function update(Request $request, Campeonato $campeonato)
     {
-        //
+        
+        $campeonato->campeonato = $request->campeonato;
+        $campeonato->fechainicio = $request->fechainicio;
+        $campeonato->fechafin = $request->fechafin;
+        $campeonato->categoria_id = $request->categoria_id;
+        $campeonato->save();
+
+        return redirect()->route('campeonato.index');
     }
 
     /**
@@ -80,6 +109,7 @@ class CampeonatoController extends Controller
      */
     public function destroy(Campeonato $campeonato)
     {
-        //
+        $campeonato->delete();
+        return response()->json(['ok'=>'Eliminado correctamente']);
     }
 }

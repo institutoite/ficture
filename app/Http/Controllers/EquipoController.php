@@ -102,4 +102,11 @@ class EquipoController extends Controller
         $equipo->delete();
         return response()->json(['respuesta' => 'Eliminado correctamente']);
     }
+
+    public function oponentes($equipo_id){
+
+        
+
+        return response()->json(['e'=>$equipo_id]);
+    }
 }

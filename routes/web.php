@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PersonaController;
 use App\Http\Controllers\EquipoController;
 use App\Http\Controllers\CanchaController;
+use App\Http\Controllers\CampeonatoController;
+use App\Http\Controllers\PartidoController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -41,6 +43,8 @@ Route::get('listar/equipos',[EquipoController::class, 'listar'])->name('equipo.l
 Route::post('equipos/guardar',[EquipoController::class, 'store'])->name('equipo.guardar');
 Route::delete('equipos/eliminar/{equipo}',[EquipoController::class, 'destroy'])->name('equipo.eliminar');
 
+Route::get('oponentes/{equipo}',[EquipoController::class, 'oponentes'])->name('equipo.oponentes');
+
 /* %%%%%%%%%%%%%%%%%%%%%%%%%  RUTAS DE canchas  %%%%%%%%%%%%%%%%%%%%%%%% */
 Route::get('canchas',[CanchaController::class, 'index'])->name('cancha.index');
 Route::get('canchas/show/{cancha}',[CanchaController::class, 'show'])->name('cancha.show');
@@ -60,6 +64,17 @@ Route::get('campeonatos/create',[CampeonatoController::class, 'create'])->name('
 Route::get('listar/campeonatos',[CampeonatoController::class, 'listar'])->name('campeonato.listar');
 Route::post('campeonatos/guardar',[CampeonatoController::class, 'store'])->name('campeonato.guardar');
 Route::delete('campeonatos/eliminar/{campeonato}',[CampeonatoController::class, 'destroy'])->name('campeonato.eliminar');
+
+
+/* %%%%%%%%%%%%%%%%%%%%%%%%%  RUTAS DE CAMPEONATO  %%%%%%%%%%%%%%%%%%%%%%%% */
+Route::get('partidos',[PartidoController::class, 'index'])->name('partido.index');
+Route::get('partidos/show/{partido}',[PartidoController::class, 'show'])->name('partido.show');
+Route::get('partidos/edit/{partido}',[PartidoController::class, 'edit'])->name('partido.edit');
+Route::patch('partidos/actualizar/{partido}',[PartidoController::class, 'update'])->name('partido.update');
+Route::get('partidos/create',[PartidoController::class, 'create'])->name('partido.create');
+
+Route::post('partidos/guardar',[PartidoController::class, 'store'])->name('partido.guardar');
+Route::delete('partidos/eliminar/{partido}',[PartidoController::class, 'destroy'])->name('partido.eliminar');
 
 
 Auth::routes();

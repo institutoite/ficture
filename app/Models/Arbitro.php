@@ -12,4 +12,6 @@ class Arbitro extends Model
     public function persona(){
         return  $this->belongsTo(Persona::class);
     }
+
+   
 }
