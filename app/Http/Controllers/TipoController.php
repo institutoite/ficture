@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Tipo;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Http\Requests\StoreTipoRequest;
 
 class TipoController extends Controller
 {
@@ -15,7 +16,8 @@ class TipoController extends Controller
      */
     public function index()
     {
-        //
+        $tipos = Tipo::all();
+        return view('tipo.index',compact('tipos'));
     }
 
     /**
@@ -25,7 +27,7 @@ class TipoController extends Controller
      */
     public function create()
     {
-        //
+        return view('tipo.create');
     }
 
     /**
@@ -34,9 +36,13 @@ class TipoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreTipoRequest $request)
     {
-        //
+       // dd($request->all());
+        $tipo=new Tipo;
+        $tipo->descripcion=$request->descripcion;
+        $tipo->save();
+        return redirect()->route('tipo.index');
     }
 
     /**
@@ -47,7 +53,7 @@ class TipoController extends Controller
      */
     public function show(Tipo $tipo)
     {
-        //
+        return view('tipo.show', compact('tipo'));
     }
 
     /**
@@ -58,7 +64,7 @@ class TipoController extends Controller
      */
     public function edit(Tipo $tipo)
     {
-        //
+        return view('tipo.editar',compact('tipo'));
     }
 
     /**
@@ -70,7 +76,10 @@ class TipoController extends Controller
      */
     public function update(Request $request, Tipo $tipo)
     {
-        //
+        
+        $tipo->descripcion = $request->descripcion;
+        $tipo->save();
+        return redirect()->route('tipo.show',$tipo);
     }
 
     /**
@@ -81,6 +90,7 @@ class TipoController extends Controller
      */
     public function destroy(Tipo $tipo)
     {
-        //
+        $tipo->delete();
+        return response()->json(['ok'=>'eliminado satistifacotiamente']);
     }
 }

@@ -5,36 +5,44 @@
 @stop
 
 
-@section('title', 'Equipo')
+@section('title', 'Anotaciones')
 @section('plugins.Sweetalert2', true)
 
 
 @section('content_header')
-    <h1>Equipos</h1>
+    <h1>Anotaciones</h1>
 @stop
 @section('content')
+
+    {{-- {{dd($partidos)}} --}}
     <div class="card">
         <div class="card-header bg-success">
-            LISTA DE Equipos
-            <a class="btn btn-warning float-right" href="{{route('tipo.create')}}">Crear Equipo</a>
+            LISTA DE ANOTACIONES
+            <a class="btn btn-warning float-right" href="{{route('anotacion.create')}}">Crear Anotacion</a>
         </div>
         <div class="card-body">
-            <table id="equipos" class="table table-striped table-hover table-bordered">
+            <table id="anotaciones" class="table table-striped table-hover table-bordered">
                 <thead>
                     <tr>
                         <th>ID</th>
                         <th>DESCRIPTION</th>
+                        <th>PARTIDO</th>
+                        <th>JUGADOR</th>
+                        <th>TIPO</th>
                         <th>OPCIONES</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($tipos as $tipo)
+                    @foreach ($anotaciones as $anotacion)
                         <tr>
-                            <td>{{ $tipo->id }}</td>
-                            <td>{{ $tipo->descripcion }}</td>
+                            <td>{{ $anotacion->id }}</td>
+                            <td>{{ $anotacion->descripcion }}</td>
+                            <td>{{ App\Models\Equipo::find($anotacion->partido->equipo_id)->nombre.' Vs '.App\Models\Equipo::find($anotacion->partido->equipo2_id)->nombre}}</td>
+                            <td>{{ App\Models\Jugador::find($anotacion->jugador_id)->persona->nombre }}</td>
+                            <td>{{ App\Models\Tipo::find($anotacion->tipo_id)->descripcion }}</td>
                             <td>  
-                                <a href="{{route('tipo.edit',$tipo)}}"><i class="fas fa-edit text-primary"></i></a>
-                                <a href="{{route('tipo.show',$tipo)}}"><i class="fas fa-eye text-success"></i></a>
+                                <a href="{{route('anotacion.edit',$anotacion->id)}}"><i class="fas fa-edit text-primary"></i></a>
+                                <a href="{{route('anotacion.show',$anotacion->id)}}"><i class="fas fa-eye text-success"></i></a>
                                 
                                 <form action="" class="d-inline formulario">
                                     @csrf 
@@ -59,7 +67,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <script>
         $(document).ready(function() {
-            let tabla=$('#tipos').DataTable({
+            let tabla=$('#anotaciones').DataTable({
                 "language": {
                     "url": "//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json"
                 },
@@ -82,7 +90,7 @@
                         }).then((result) => {
                         if (result.value) {
                             $.ajax({
-                                url : 'tipos/eliminar/'+id,
+                                url : 'anotaciones/eliminar/'+id,
                                 type: 'DELETE',
                                 data:{
                                     id:id,
@@ -94,23 +102,7 @@
                                     //tabla.ajax.reload();
                                 },
                                 error : function(xhr, status) {
-                                    const Toast = Swal.mixin({
-                                        toast: true,
-                                        position: 'top-end',
-                                        showConfirmButton: false,
-                                        timer: 3000,
-                                        timerProgressBar: true,
-                                        didOpen: (toast) => {
-                                            toast.addEventListener('mouseenter', Swal.stopTimer)
-                                            toast.addEventListener('mouseleave', Swal.resumeTimer)
-                                        }
-                                        })
-
-                                        Toast.fire({
-                                        type: 'error',
-                                        title: 'No se puede eliminar por que esta relacionada'
-                                        })
-
+                                    console.log('falle al eliminar')
                                 },
                             });
                         }else{
@@ -127,7 +119,7 @@
                             })
     
                             Toast.fire({
-                                type: 'error',
+                                icon: 'error',
                                 title: 'No se eliminó el registro'
                             })
                         }

@@ -5,7 +5,7 @@
 @stop
 
 
-@section('title', 'mostrar persona')
+@section('title', 'mostrar TIPO')
 
 @section('content_header')
     
@@ -14,14 +14,14 @@
 
     <div class="card">
         <div class="card-header bg-success">
-            EDITAR PERSONA
+            EDITAR TIPO
         </div>
 
         <div class="card-body">
-            <form method="post" action="{{route('equipo.update',$equipo)}}">
+            <form method="post" action="{{route('tipo.update',$tipo)}}">
                 {{ method_field('PATCH') }}
                 @csrf
-                @include('equipo.form')
+                @include('tipo.form')
                 @include('include.boton')
             </form>
         </div>

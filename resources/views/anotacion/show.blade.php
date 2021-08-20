@@ -5,19 +5,20 @@
 @stop
 
 
-@section('title', 'mostrar persona')
+@section('title', 'mostrar ANOTACION')
 
 @section('content_header')
     
 @stop
 @section('content')
+    
     <div class="card">
         <div class="card-header bg-success">
-            MOSTRAR EQUIPO
-            <a class="btn btn-warning float-right" href="{{route('tipo.index')}}">Ver lista</a>
+            MOSTRAR ANOTACION
+            <a class="btn btn-warning float-right" href="{{route('anotacion.index')}}">Ver lista</a>
         </div>
         <div class="card-body">
-            <table id="personas" class="table table-striped table-hover">
+            <table  class="table table-striped table-hover">
                 <thead>
                     <tr>
                         <th>ATRIBUTO</th>
@@ -27,11 +28,23 @@
                 <tbody>
                     <tr>
                         <td>ID</td>
-                        <td>{{$tipo->id}}</td>
+                        <td>{{$anotacion->id}}</td>
                     </tr>
                     <tr>
-                        <td>NOMBRE</td>
-                        <td>{{$tipo->descripcion}}</td>
+                        <td>PARTIDO</td>
+                        <td>{{App\Models\Equipo::findOrFail($anotacion->partido->equipo_id)->nombre.' VS '.App\Models\Equipo::findOrFail($anotacion->partido->equipo2_id)->nombre}}</td>
+                    </tr>
+                    <tr>
+                        <td>PARTIDO</td>
+                        <td>{{$anotacion->descripcion}}</td>
+                    </tr>
+                    <tr>
+                        <td>JUGADOR</td>
+                        <td>{{App\Models\Jugador::findOrFail($anotacion->jugador_id)->persona->nombre}}</td>
+                    </tr>
+                    <tr>
+                        <td>TIPO ANOTACION </td>
+                        <td>{{App\Models\Tipo::findOrFail($anotacion->tipo_id)->descripcion}}</td>
                     </tr>
                 </tbody>
             </table>                

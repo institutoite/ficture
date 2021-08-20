@@ -16,9 +16,9 @@
             MOSTRAR PERSONA
         </div>
         <div class="card-body">
-            <form method="post" action="{{route('equipo.guardar')}}">
+            <form method="post" action="{{route('tipo.guardar')}}">
                 @csrf
-                @include('equipo.form')
+                @include('tipo.form')
                 @include('include.boton')
             </form>
         </div>

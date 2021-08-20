@@ -6,6 +6,8 @@ use App\Http\Controllers\EquipoController;
 use App\Http\Controllers\CanchaController;
 use App\Http\Controllers\CampeonatoController;
 use App\Http\Controllers\PartidoController;
+use App\Http\Controllers\TipoController;
+use App\Http\Controllers\AnotacionController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
