@@ -5,50 +5,44 @@
 @stop
 
 
-@section('title', 'Campeonatos')
+@section('title', 'Equipo')
 @section('plugins.Sweetalert2', true)
 
 
 @section('content_header')
-    <h1>Campeonatos</h1>
+    <h1>Equipos</h1>
 @stop
 @section('content')
-
-    {{-- {{dd($partidos)}} --}}
     <div class="card">
         <div class="card-header bg-success">
-            LISTA DE PARTIDOS
-            <a class="btn btn-warning float-right" href="{{route('partido.create')}}">Crear Campeonato</a>
+            LISTA DE Equipos
+            <a class="btn btn-warning float-right" href="{{route('equipo.create')}}">Crear Equipo</a>
         </div>
         <div class="card-body">
-            <table id="partidos" class="table table-striped table-hover table-bordered">
+            <table id="equipos" class="table table-striped table-hover table-bordered">
                 <thead>
                     <tr>
                         <th>ID</th>
-                        <th>LOCAL</th>
-                        <th>VISITANTE</th>
-                        <th>ARBITRO</th>
-                        <th>CAMPEONATO</th>
-                        <th>CANCHA</th>
-                        <th>FECHA</th>
-                        <th>HORA</th>
+                        <th>NOMBRE</th>
+                        <th>DIRECCION</th>
+                        <th>ESCUDO</th>
+                        <th>COLORES</th>
+                        <th>FUNDACION</th>
                         <th>OPCIONES</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($partidos as $partido)
+                    @foreach ($equipos as $equipo)
                         <tr>
-                            <td>{{ $partido->id }}</td>
-                            <td>{{ App\Models\Equipo::find($partido->equipo_id)->nombre }}</td>
-                            <td>{{ App\Models\Equipo::find($partido->equipo2_id)->nombre }}</td>
-                            <td>{{ App\Models\Arbitro::find($partido->arbitro_id)->persona->nombre }}</td>
-                            <td>{{ App\Models\Campeonato::find($partido->campeonato_id)->campeonato }}</td>
-                            <td>{{ App\Models\Cancha::find($partido->cancha_id)->nombre}}</td>
-                            <td>{{ $partido->fecha}}</td>
-                            <td>{{ $partido->hora}}</td>
+                            <td>{{ $equipo->id }}</td>
+                            <td>{{ $equipo->nombre }}</td>
+                            <td>{{ $equipo->direccion }}</td>
+                            <td>{{ $equipo->escudo }}</td>
+                            <td>{{ $equipo->colores}}</td>
+                            <td>{{ $equipo->fundacion }}</td>
                             <td>  
-                                <a href="{{route('partido.edit',$partido->id)}}"><i class="fas fa-edit text-primary"></i></a>
-                                <a href="{{route('partido.show',$partido->id)}}"><i class="fas fa-eye text-success"></i></a>
+                                <a href="{{route('equipo.edit',$equipo)}}"><i class="fas fa-edit text-primary"></i></a>
+                                <a href="{{route('equipo.show',$equipo)}}"><i class="fas fa-eye text-success"></i></a>
                                 
                                 <form action="" class="d-inline formulario">
                                     @csrf 
@@ -73,7 +67,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <script>
         $(document).ready(function() {
-            let tabla=$('#campeonatoss').DataTable({
+            let tabla=$('#equipos').DataTable({
                 "language": {
                     "url": "//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json"
                 },
@@ -96,7 +90,7 @@
                         }).then((result) => {
                         if (result.value) {
                             $.ajax({
-                                url : 'partidos/eliminar/'+id,
+                                url : 'equipos/eliminar/'+id,
                                 type: 'DELETE',
                                 data:{
                                     id:id,

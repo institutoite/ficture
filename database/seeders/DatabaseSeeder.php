@@ -21,6 +21,10 @@ class DatabaseSeeder extends Seeder
             CategoriaSeeder::class,
             ArbitroSeeder::class,
             CampeonatoSeeder::class,
+            EquipoequipoSeeder::class,
+            JugadorSeeder::class,
+            TipoSeeder::class,
+            AnotacionSeeder::class,
         ]);
     }
 }

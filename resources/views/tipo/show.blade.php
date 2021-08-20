@@ -11,14 +11,13 @@
     
 @stop
 @section('content')
-    
     <div class="card">
         <div class="card-header bg-success">
-            MOSTRAR CAMPEONATO
-            <a class="btn btn-warning float-right" href="{{route('campeonato.index')}}">Ver lista</a>
+            MOSTRAR EQUIPO
+            <a class="btn btn-warning float-right" href="{{route('equipo.index')}}">Ver lista</a>
         </div>
         <div class="card-body">
-            <table  class="table table-striped table-hover">
+            <table id="personas" class="table table-striped table-hover">
                 <thead>
                     <tr>
                         <th>ATRIBUTO</th>
@@ -28,36 +27,28 @@
                 <tbody>
                     <tr>
                         <td>ID</td>
-                        <td>{{$partido->id}}</td>
+                        <td>{{$equipo->id}}</td>
                     </tr>
                     <tr>
-                        <td>ID</td>
-                        <td>{{App\Models\Equipo::findOrFail($partido->equipo_id)->nombre}}</td>
-                    </tr>
-                    {{-- <tr>
                         <td>NOMBRE</td>
-                        <td>{{$campeonatito->campeonato}}</td>
+                        <td>{{$equipo->nombre}}</td>
                     </tr>
                     <tr>
-                        <td>FECHAINICIO</td>
-                        <td>{{$campeonatito->fechainicio->diffForHumans()}}</td>
+                        <td>DIRECCION</td>
+                        <td>{{$equipo->direccion}}</td>
                     </tr>
                     <tr>
-                        <td>FECJAFIN</td>
-                        <td>{{$campeonatito->fechafin->diffForHumans()}}</td>
+                        <td>ESCUDO</td>
+                        <td>{{$equipo->escudo}}</td>
                     </tr>
                     <tr>
-                        <td>CATEGORIA</td>
-                        <td>{{$campeonatito->categoria}}</td>
+                        <td>COLORES</td>
+                        <td>{{$equipo->colores}}</td>
                     </tr>
                     <tr>
-                        <td>CREADO</td>
-                        <td>{{$campeonatito->created_at}}</td>
+                        <td>FUNDACION</td>
+                        <td>{{$equipo->fundacion}}</td>
                     </tr>
-                    <tr>
-                        <td>ACTUALIZADO</td>
-                        <td>{{$campeonatito->updated_at}}</td>
-                    </tr> --}}
                 </tbody>
             </table>                
         </div>

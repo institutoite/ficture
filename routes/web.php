@@ -76,6 +76,26 @@ Route::get('partidos/create',[PartidoController::class, 'create'])->name('partid
 Route::post('partidos/guardar',[PartidoController::class, 'store'])->name('partido.guardar');
 Route::delete('partidos/eliminar/{partido}',[PartidoController::class, 'destroy'])->name('partido.eliminar');
 
+/* %%%%%%%%%%%%%%%%%%%%%%%%%  RUTAS DE CAMPEONATO  %%%%%%%%%%%%%%%%%%%%%%%% */
+Route::get('anotaciones', [AnotacionController::class, 'index'])->name('anotacion.index');
+Route::get('anotaciones/show/{anotacion}', [AnotacionController::class, 'show'])->name('anotacion.show');
+Route::get('anotaciones/edit/{anotacion}', [AnotacionController::class, 'edit'])->name('anotacion.edit');
+Route::patch('anotaciones/actualizar/{anotacion}', [AnotacionController::class, 'update'])->name('anotacion.update');
+Route::get('anotaciones/create', [AnotacionController::class, 'create'])->name('anotacion.create');
+Route::get('listar/anotaciones', [AnotacionController::class, 'listar'])->name('anotacion.listar');
+Route::post('anotaciones/guardar', [AnotacionController::class, 'store'])->name('anotacion.guardar');
+Route::delete('anotaciones/eliminar/{anotacion}', [AnotacionController::class, 'destroy'])->name('anotacion.eliminar');
+
+/* %%%%%%%%%%%%%%%%%%%%%%%%%  RUTAS DE CAMPEONATO  %%%%%%%%%%%%%%%%%%%%%%%% */
+Route::get('tipos', [TipoController::class, 'index'])->name('tipo.index');
+Route::get('tipos/show/{tipo}', [TipoController::class, 'show'])->name('tipo.show');
+Route::get('tipos/edit/{tipo}', [TipoController::class, 'edit'])->name('tipo.edit');
+Route::patch('tipos/actualizar/{tipo}', [TipoController::class, 'update'])->name('tipo.update');
+Route::get('tipos/create', [TipoController::class, 'create'])->name('tipo.create');
+Route::get('listar/tipos', [TipoController::class, 'listar'])->name('tipo.listar');
+Route::post('tipos/guardar', [TipoController::class, 'store'])->name('tipo.guardar');
+Route::delete('tipos/eliminar/{tipo}', [TipoController::class, 'destroy'])->name('tipo.eliminar');
+
 
 Auth::routes();
 

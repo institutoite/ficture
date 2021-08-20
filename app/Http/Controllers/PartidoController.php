@@ -73,7 +73,11 @@ class PartidoController extends Controller
      */
     public function show($id)
     {
-        //
+        $partido = DB::table('equipo_equipo')
+            ->where('id', $id)
+            ->get()->first();
+        //dd($partido);
+        return view('partido.show', compact('partido'));
     }
 
     /**
@@ -104,7 +108,15 @@ class PartidoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        //dd($request->all());
+        $datos = [
+            "cancha_id" => $request->cancha_id,
+            "arbitro_id" => $request->arbitro_id,
+            "campeonato_id" => $request->campeonato_id,
+            "fecha" => $request->fecha,
+            "hora" => $request->hora,
+        ];
+        Equipo::find($request->equipo_id)->oponentes()->updateExistingPivot($request->equipo2_id, $datos);
     }
 
     /**
@@ -115,7 +127,8 @@ class PartidoController extends Controller
      */
     public function destroy($id)
     {
-        //
+        DB::statement("DELETE FROM `equipo_equipo` WHERE id=?",[$id]);
+        return response()->json(['ok'=>"eliminado correctamente"]);
     }
 
     public function CrearPartido(Request $request){
