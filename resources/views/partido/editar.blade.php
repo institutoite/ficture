@@ -18,22 +18,36 @@
         </div>
 
         <div class="card-body">
-            <form method="post" action="{{route('campeonato.update',$campeonato)}}">
+            <form method="post" action="{{route('partido.update',$partido->id)}}">
                 {{ method_field('PATCH') }}
                 @csrf
-                @include('campeonato.form')
+                @include('partido.form')
                 @include('include.boton')
             </form>
         </div>
     </div>
 @stop
-
 @section('js')
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script>
         $(document).ready(function() {
-
+            $("#equipo_id" ).change(function() {
+                let equipo_id=$(this).val();
+                $.ajax({
+                    url : '../../oponentes/'+equipo_id,
+                    success : function(respuesta) {
+                        var html="";
+                        $.each(respuesta, function(i, oponente) {
+                            html += "<option value='"+ oponente.id +"'>"+ oponente.nombre+"</option>";
+                        });
+                        $('#equipo2_id').empty();
+                        $('#equipo2_id').append(html);
+                    },
+                    error : function(xhr, status) {
+                        console.log('fallé')
+                    },
+                });
+            });
         });
     </script>
 @stop
-        

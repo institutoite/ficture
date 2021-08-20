@@ -105,8 +105,8 @@ class EquipoController extends Controller
 
     public function oponentes($equipo_id){
 
+        $oponentes=Equipo::where('id','<>',$equipo_id)->get();
         
-
-        return response()->json(['e'=>$equipo_id]);
+        return response()->json($oponentes);
     }
 }

@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 use App\Models\Arbitro;
 use App\Models\Cancha;
 use App\Models\Equipo;
+use App\Models\Campeonato;
+use Illuminate\Support\Facades\DB;
 
 
 
@@ -20,7 +22,9 @@ class PartidoController extends Controller
      */
     public function index()
     {
-        //
+        $partidos=DB::table('equipo_equipo')->get();
+        return view('partido.index',compact('partidos'));
+
     }
 
     /**
@@ -33,8 +37,9 @@ class PartidoController extends Controller
         $equipos=Equipo::all();
         $canchas=Cancha::all();
         $arbitros=Arbitro::all();
+        $campeonatos = Campeonato::all();
 
-        return view('partido.create',compact('equipos','canchas','arbitros')); 
+        return view('partido.create',compact('equipos','canchas','arbitros','campeonatos')); 
     }
 
     /**
@@ -45,7 +50,19 @@ class PartidoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // dd($request->all());
+        $equipo=Equipo::findOrFail($request->equipo_id);
+        $datos=[
+            "cancha_id" =>$request->cancha_id,
+            "arbitro_id" =>$request->arbitro_id,
+            "campeonato_id" => $request->campeonato_id,
+            "fecha" =>$request->fecha,
+            "hora" =>$request->hora,
+        ];
+        //$book->authors()->attach($authorId, ['best_seller' => true]);
+        $equipo->oponentes()->attach($request->equipo2_id,$datos);
+
+        return redirect()->route('partido.index');
     }
 
     /**
@@ -67,7 +84,15 @@ class PartidoController extends Controller
      */
     public function edit($id)
     {
-        //
+        $partido= DB::table('equipo_equipo')
+                ->where('id', $id)
+                ->get()->first();
+        $equipos = Equipo::all();
+        $canchas = Cancha::all();
+        $arbitros = Arbitro::all();
+        $campeonatos = Campeonato::all();
+        $oponentes = Equipo::where('id', '<>', $partido->equipo_id)->first()->get();
+        return view('partido.editar',compact('oponentes','partido', 'equipos', 'canchas', 'arbitros', 'campeonatos'));
     }
 
     /**

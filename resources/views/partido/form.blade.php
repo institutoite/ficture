@@ -5,8 +5,8 @@
             <select class="form-control @error('equipo_id') is-invalid @enderror"  name="equipo_id" id="equipo_id">
                 <option value=""> Elija equipo </option>
                     @foreach ($equipos as $equipo)
-                        @isset($equipo1)     
-                            <option  value="{{$equipo->id}}" {{$equipo->id==$equipo1->id ? 'selected':''}}>{{$equipo->nombre}}</option>     
+                        @isset($partido)     
+                            <option  value="{{$equipo->id}}" {{$equipo->id==$partido->equipo_id ? 'selected':''}}>{{$equipo->nombre}}</option>     
                         @else
                             <option value="{{ $equipo->id }}" {{ old('equipo_id') == $equipo->id ? 'selected':'' }} >{{ $equipo->nombre }}</option> 
                         @endisset 
@@ -24,7 +24,11 @@
         <div class="form-floating mb-3">
             <select class="form-control @error('equipo2_id') is-invalid @enderror"  name="equipo2_id" id="equipo2_id">
                 <option value=""> Elija equipo </option>
-
+                    @isset($partido)
+                        @foreach ($oponentes as $oponente)
+                            <option  value="{{$oponente->id}}" {{$oponente->id==$partido->equipo2_id ? 'selected':''}}>{{$oponente->nombre}}</option>     
+                        @endforeach
+                    @endisset
             </select>
             <label for="equipo2_id">Equipo Local</label>
             @error('equipo2_id')
@@ -34,6 +38,22 @@
     </div>
 </div>
 
+<div class="form-floating mb-3">
+    <select class="form-control @error('campeonato_id') is-invalid @enderror"  name="campeonato_id" id="campeonato_id">
+        <option value=""> Elija campeonato </option>
+            @foreach ($campeonatos as $campeonato)
+                @isset($partido)     
+                    <option  value="{{$campeonato->id}}" {{$campeonato->id==$partido->campeonato_id ? 'selected':''}}>{{$campeonato->campeonato}}</option>     
+                @else
+                    <option value="{{ $campeonato->id }}" {{ old('campeonato_id') == $campeonato->id ? 'selected':'' }} >{{ $campeonato->campeonato }}</option> 
+                @endisset 
+            @endforeach
+    </select>
+    <label for="campeonato_id">Seleccione Campeonato</label>
+    @error('campeonato_id')
+        <div class="text-danger">{{$errors->first('campeonato_id')}}</div>
+    @enderror
+</div>
 
 
 
@@ -42,8 +62,8 @@
     <select class="form-control @error('cancha_id') is-invalid @enderror"  name="cancha_id" id="cancha_id">
         <option value=""> Elija cancha </option>
             @foreach ($canchas as $cancha)
-                @isset($equipo1)     
-                    <option  value="{{$cancha->id}}" {{$cancha->id==$cancha1->id ? 'selected':''}}>{{$cancha->nombre}}</option>     
+                @isset($partido)     
+                    <option  value="{{$cancha->id}}" {{$cancha->id==$partido->cancha_id ? 'selected':''}}>{{$cancha->nombre}}</option>     
                 @else
                     <option value="{{ $cancha->id }}" {{ old('cancha_id') == $cancha->id ? 'selected':'' }} >{{ $cancha->nombre }}</option> 
                 @endisset 
@@ -62,8 +82,8 @@
     <select class="form-control @error('arbitro_id') is-invalid @enderror"  name="arbitro_id" id="arbitro_id">
         <option value=""> Elija arbitro </option>
             @foreach ($arbitros as $arbitro)
-                @isset($equipo1)     
-                    <option  value="{{$arbitro->id}}" {{$arbitro->id==$arbitro1->id ? 'selected':''}}>{{$arbitro->nombre}}</option>     
+                @isset($partido)     
+                    <option  value="{{$arbitro->id}}" {{$arbitro->id==$partido->arbitro_id ? 'selected':''}}>{{$arbitro->persona->nombre}}</option>     
                 @else
                     <option value="{{ $arbitro->id }}" {{ old('arbitro_id') == $arbitro->id ? 'selected':'' }} >{{ $arbitro->persona->nombre }}</option> 
                 @endisset 
@@ -80,7 +100,7 @@
     <div class="col-6">
        
         <div class="form-floating mb-3">
-            <input type="date" class="form-control @error('fecha') is-invalid @enderror" id="fecha" name="fecha" value="{{old('fecha',$campeonato->fecha ?? '')}}">
+            <input type="date" class="form-control @error('fecha') is-invalid @enderror" id="fecha" name="fecha" value="{{old('fecha',$partido->fecha ?? '')}}">
             <label for="fecha">fecha</label>
             @error('fecha')
                 <div class="text-danger">{{$errors->first('fecha')}}</div>
@@ -90,7 +110,7 @@
     <div class="col-6">
         
         <div class="form-floating mb-3">
-            <input type="time" class="form-control @error('hora') is-invalid @enderror" id="hora" name="hora" value="{{old('hora',$campeonato->hora ?? '')}}">
+            <input type="time" class="form-control @error('hora') is-invalid @enderror" id="hora" name="hora" value="{{old('hora',$partido->hora ?? '')}}">
             <label for="hora">hora</label>
             @error('hora')
                 <div class="text-danger">{{$errors->first('hora')}}</div>

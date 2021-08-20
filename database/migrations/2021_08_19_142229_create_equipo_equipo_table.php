@@ -27,6 +27,9 @@ class CreateEquipoEquipoTable extends Migration
             $table->unsignedInteger('arbitro_id');
             $table->foreign('arbitro_id')->references('id')->on('arbitros');
 
+            $table->unsignedInteger('campeonato_id');
+            $table->foreign('campeonato_id')->references('id')->on('campeonatos');
+
             $table->unsignedInteger('cancha_id');
             $table->foreign('cancha_id')->references('id')->on('canchas');
 

@@ -13,34 +13,42 @@
     <h1>Campeonatos</h1>
 @stop
 @section('content')
+
+    {{-- {{dd($partidos)}} --}}
     <div class="card">
         <div class="card-header bg-success">
-            LISTA DE Campeonatos
-            <a class="btn btn-warning float-right" href="{{route('campeonato.create')}}">Crear Campeonato</a>
+            LISTA DE PARTIDOS
+            <a class="btn btn-warning float-right" href="{{route('partido.create')}}">Crear Campeonato</a>
         </div>
         <div class="card-body">
-            <table id="campeonatos" class="table table-striped table-hover table-bordered">
+            <table id="partidos" class="table table-striped table-hover table-bordered">
                 <thead>
                     <tr>
                         <th>ID</th>
-                        <th>NOMBRE</th>
-                        <th>FECHAINICIO</th>
-                        <th>FECHAFIN</th>
-                        <th>CATEGORIA</th>
+                        <th>LOCAL</th>
+                        <th>VISITANTE</th>
+                        <th>ARBITRO</th>
+                        <th>CAMPEONATO</th>
+                        <th>CANCHA</th>
+                        <th>FECHA</th>
+                        <th>HORA</th>
                         <th>OPCIONES</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($campeonatos as $campeonato)
+                    @foreach ($partidos as $partido)
                         <tr>
-                            <td>{{ $campeonato->id }}</td>
-                            <td>{{ $campeonato->campeonato }}</td>
-                            <td>{{ $campeonato->fechainicio }}</td>
-                            <td>{{ $campeonato->fechafin }}</td>
-                            <td>{{ $campeonato->categoria}}</td>
+                            <td>{{ $partido->id }}</td>
+                            <td>{{ App\Models\Equipo::find($partido->equipo_id)->nombre }}</td>
+                            <td>{{ App\Models\Equipo::find($partido->equipo2_id)->nombre }}</td>
+                            <td>{{ App\Models\Arbitro::find($partido->arbitro_id)->persona->nombre }}</td>
+                            <td>{{ App\Models\Campeonato::find($partido->campeonato_id)->campeonato }}</td>
+                            <td>{{ App\Models\Cancha::find($partido->cancha_id)->nombre}}</td>
+                            <td>{{ $partido->fecha}}</td>
+                            <td>{{ $partido->hora}}</td>
                             <td>  
-                                <a href="{{route('campeonato.edit',$campeonato)}}"><i class="fas fa-edit text-primary"></i></a>
-                                <a href="{{route('campeonato.show',$campeonato)}}"><i class="fas fa-eye text-success"></i></a>
+                                <a href="{{route('partido.edit',$partido->id)}}"><i class="fas fa-edit text-primary"></i></a>
+                                <a href="{{route('partido.show',$partido->id)}}"><i class="fas fa-eye text-success"></i></a>
                                 
                                 <form action="" class="d-inline formulario">
                                     @csrf 

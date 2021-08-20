@@ -10,6 +10,9 @@
     
 @stop
 @section('content')
+
+{{-- {{ dd($campeonatos) }} --}}
+
     <div class="card">
         <div class="card-header bg-success">
             CREAR PARTIDO
@@ -33,7 +36,12 @@
                 $.ajax({
                     url : '../oponentes/'+equipo_id,
                     success : function(respuesta) {
-                       console.log(respuesta); 
+                        var html="";
+                        $.each(respuesta, function(i, oponente) {
+                            html += "<option value='"+ oponente.id +"'>"+ oponente.nombre+"</option>";
+                        });
+                        $('#equipo2_id').empty();
+                        $('#equipo2_id').append(html);
                     },
                     error : function(xhr, status) {
                         console.log('fallé')
