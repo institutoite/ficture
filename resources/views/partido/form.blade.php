@@ -30,9 +30,32 @@
                         @endforeach
                     @endisset
             </select>
-            <label for="equipo2_id">Equipo Local</label>
+            <label for="equipo2_id">Equipo Visitante</label>
             @error('equipo2_id')
                 <div class="text-danger">{{$errors->first('equipo2_id')}}</div>
+            @enderror
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-6">
+       {{-- %%%%%%%%%%%%%%%%%%%%%%%%%%%  EQUIPO LOCAL  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% --}}
+        <div class="form-floating mb-3">
+            <input type="number"  class="form-control @error('gol1') is-invalid @enderror" id="gol1" name="gol1" value="{{old('gol1',$partido->gol1 ?? '')}}">
+            <label for="gol1">Goles Local</label>
+            @error('gol1')
+                <div class="text-danger">{{$errors->first('gol1')}}</div>
+            @enderror
+        </div>
+    </div>
+    <div class="col-6">
+        
+         {{-- %%%%%%%%%%%%%%%%%%%%%%%%%%%  EQUIPO VISITANTE  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% --}}
+        <div class="form-floating mb-3">
+            <input type="number" class="form-control @error('gol2') is-invalid @enderror" id="gol2" name="gol2" value="{{old('gol2',$partido->gol2 ?? '')}}">
+            <label for="gol2">Goles Visitante</label>
+            @error('gol2')
+                <div class="text-danger">{{$errors->first('gol2')}}</div>
             @enderror
         </div>
     </div>
@@ -108,7 +131,6 @@
         </div>
     </div>
     <div class="col-6">
-        
         <div class="form-floating mb-3">
             <input type="time" class="form-control @error('hora') is-invalid @enderror" id="hora" name="hora" value="{{old('hora',$partido->hora ?? '')}}">
             <label for="hora">hora</label>

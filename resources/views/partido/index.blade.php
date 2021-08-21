@@ -10,7 +10,7 @@
 
 
 @section('content_header')
-    <h1>Campeonatos</h1>
+    <h1>Partidos</h1>
 @stop
 @section('content')
 
@@ -18,7 +18,7 @@
     <div class="card">
         <div class="card-header bg-success">
             LISTA DE PARTIDOS
-            <a class="btn btn-warning float-right" href="{{route('partido.create')}}">Crear Campeonato</a>
+            <a class="btn btn-warning float-right" href="{{route('partido.create')}}">Crear partido</a>
         </div>
         <div class="card-body">
             <table id="partidos" class="table table-striped table-hover table-bordered">

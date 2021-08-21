@@ -22,7 +22,6 @@ class CreateEquipoEquipoTable extends Migration
             $table->unsignedInteger('equipo2_id');
             $table->foreign('equipo2_id')->references('id')->on('equipos');
 
-
             /*%%%%%%%%%%%%%%%%% COLUMNAS PIVOTE %%%%%%%%%%%%%%%%%%%%% */
             $table->unsignedInteger('arbitro_id');
             $table->foreign('arbitro_id')->references('id')->on('arbitros');
@@ -35,6 +34,9 @@ class CreateEquipoEquipoTable extends Migration
 
             $table->date('fecha');
             $table->time('hora');
+
+            $table->tinyInteger('gol1')->nullable();
+            $table->tinyInteger('gol2')->nullable();
 
             $table->timestamps();
         });

@@ -5,11 +5,17 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
+use App\Http\Requests\StorePartidoRequest;
+
 use App\Models\Arbitro;
 use App\Models\Cancha;
 use App\Models\Equipo;
 use App\Models\Campeonato;
+use App\Models\Equipoequipo;
+use App\Models\Persona;
 use Illuminate\Support\Facades\DB;
+
+use Barryvdh\DomPDF\Facade as PDF;
 
 
 
@@ -48,9 +54,9 @@ class PartidoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StorePartidoRequest $request)
     {
-        // dd($request->all());
+         //dd($request->all());
         $equipo=Equipo::findOrFail($request->equipo_id);
         $datos=[
             "cancha_id" =>$request->cancha_id,
@@ -58,6 +64,8 @@ class PartidoController extends Controller
             "campeonato_id" => $request->campeonato_id,
             "fecha" =>$request->fecha,
             "hora" =>$request->hora,
+            "gol1" => $request->gol1,
+            "gol2" => $request->gol2,
         ];
         //$book->authors()->attach($authorId, ['best_seller' => true]);
         $equipo->oponentes()->attach($request->equipo2_id,$datos);
@@ -106,7 +114,7 @@ class PartidoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(StorePartidoRequest $request, $id)
     {
         //dd($request->all());
         $datos = [
@@ -115,8 +123,11 @@ class PartidoController extends Controller
             "campeonato_id" => $request->campeonato_id,
             "fecha" => $request->fecha,
             "hora" => $request->hora,
+            "gol1" => $request->gol1,
+            "gol2" => $request->gol2,
         ];
         Equipo::find($request->equipo_id)->oponentes()->updateExistingPivot($request->equipo2_id, $datos);
+        return Redirect()->route('partido.show', $id);
     }
 
     /**
@@ -134,6 +145,21 @@ class PartidoController extends Controller
     public function CrearPartido(Request $request){
         dd($request->all());
     }
+
+    public function imprimirPartidos($campeonato_id)
+    {
+        
+        $partidos=Equipoequipo::where('campeonato_id',$campeonato_id)->get(); //
+        $campeonato = Campeonato::join('categorias', 'categorias.id', '=', 'campeonatos.categoria_id')
+        ->select('campeonatos.id', 'campeonatos.campeonato', 'fechainicio', 'fechafin', 'categorias.categoria')
+        ->where('campeonatos.id', '=', $campeonato_id)
+            ->get()->first();
+        $pdf = PDF::loadView('partido.imprimir',compact('partidos','campeonato'));
+
+        
+        return $pdf->stream('reporte.pdf');
+    }
+
 
 
 }

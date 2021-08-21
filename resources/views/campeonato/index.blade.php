@@ -49,6 +49,7 @@
                                         <i class="fa fa-fw fa-trash text-danger"></i>
                                     </button>
                                 </form>
+                                <a href="{{route('campeonato.patidos',$campeonato)}}"><i class="fas fa-print"></i></a>
                             </td>
                         </tr>
                     @endforeach

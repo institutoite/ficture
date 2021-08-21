@@ -45,7 +45,7 @@ return [
     |
     */
 
-    'logo' => '<b>Admin</b>LTE',
+    'logo' => '<b>Liga de </b>Barrios',
     'logo_img' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
     'logo_img_class' => 'brand-image img-circle elevation-3',
     'logo_img_xl' => null,
@@ -65,7 +65,7 @@ return [
     */
 
     'usermenu_enabled' => true,
-    'usermenu_header' => false,
+    'usermenu_header' => true,
     'usermenu_header_class' => 'bg-primary',
     'usermenu_image' => false,
     'usermenu_desc' => false,
@@ -282,22 +282,135 @@ return [
                
             ],
         ],
-        ['header' => 'labels'],
         [
-            'text'       => 'important',
-            'icon_color' => 'red',
-            'url'        => '#',
+            'text'    => 'Canchas',
+            'icon'    => 'fas fa-fw fa-user',
+            'submenu' => [
+                [
+                    'text' => 'Listar',
+                    'url'  => 'canchas',
+                    'icon'    => 'fas fa-fw fa-list',
+                ],
+                [
+                    'text' => 'crear',
+                    'url'  => 'canchas/create',
+                    'icon'    => 'fas fa-fw fa-plus',
+                ],
+                
+               
+            ],
         ],
         [
-            'text'       => 'warning',
-            'icon_color' => 'yellow',
-            'url'        => '#',
+            'text'    => 'Anotaciones',
+            'icon'    => 'fas fa-fw fa-user',
+            'submenu' => [
+                [
+                    'text' => 'Listar',
+                    'url'  => 'anotaciones',
+                    'icon'    => 'fas fa-fw fa-list',
+                ],
+                [
+                    'text' => 'crear',
+                    'url'  => 'anotaciones/create',
+                    'icon'    => 'fas fa-fw fa-plus',
+                ],
+                
+               
+            ],
         ],
         [
-            'text'       => 'information',
-            'icon_color' => 'cyan',
-            'url'        => '#',
+            'text'    => 'Partidos',
+            'icon'    => 'fas fa-fw fa-user',
+            'submenu' => [
+                [
+                    'text' => 'Listar',
+                    'url'  => 'partidos',
+                    'icon'    => 'fas fa-fw fa-list',
+                ],
+                [
+                    'text' => 'crear',
+                    'url'  => 'partidos/create',
+                    'icon'    => 'fas fa-fw fa-plus',
+                ],
+                
+               
+            ],
         ],
+        [
+            'text'    => 'Campeonatos',
+            'icon'    => 'fas fa-fw fa-user',
+            'submenu' => [
+                [
+                    'text' => 'Listar',
+                    'url'  => 'campeonatos',
+                    'icon'    => 'fas fa-fw fa-list',
+                ],
+                [
+                    'text' => 'crear',
+                    'url'  => 'campeonatos/create',
+                    'icon'    => 'fas fa-fw fa-plus',
+                ],
+                
+               
+            ],
+        ],
+        [
+            'text'    => 'Equipos',
+            'icon'    => 'fas fa-fw fa-user',
+            'submenu' => [
+                [
+                    'text' => 'Listar',
+                    'url'  => 'equipos',
+                    'icon'    => 'fas fa-fw fa-list',
+                ],
+                [
+                    'text' => 'crear',
+                    'url'  => 'equipos/create',
+                    'icon'    => 'fas fa-fw fa-plus',
+                ],
+                
+               
+            ],
+        ],
+        [
+            'text'    => 'Partidos',
+            'icon'    => 'fas fa-fw fa-user',
+            'submenu' => [
+                [
+                    'text' => 'Listar',
+                    'url'  => 'partidos',
+                    'icon'    => 'fas fa-fw fa-list',
+                ],
+                [
+                    'text' => 'crear',
+                    'url'  => 'partidos/create',
+                    'icon'    => 'fas fa-fw fa-plus',
+                ],
+                
+               
+            ],
+        ],
+        [
+            'text'    => 'Tipo anotaciones',
+            'icon'    => 'fas fa-fw fa-user',
+            'submenu' => [
+                [
+                    'text' => 'Listar',
+                    'url'  => 'tipos',
+                    'icon'    => 'fas fa-fw fa-list',
+                ],
+                [
+                    'text' => 'crear',
+                    'url'  => 'tipos/create',
+                    'icon'    => 'fas fa-fw fa-plus',
+                ],
+                
+               
+            ],
+        ],
+       
+        
+       
     ],
 
     /*

@@ -15,7 +15,7 @@
     <div class="card">
         <div class="card-header bg-success">
             MOSTRAR CAMPEONATO
-            <a class="btn btn-warning float-right" href="{{route('campeonato.index')}}">Ver lista</a>
+            <a class="btn btn-warning float-right" href="{{route('partido.index')}}">Ver lista</a>
         </div>
         <div class="card-body">
             <table  class="table table-striped table-hover">
@@ -28,36 +28,45 @@
                 <tbody>
                     <tr>
                         <td>ID</td>
-                        <td>{{$partido->id}}</td>
+                        <td>{{ $partido->id }}</td>
                     </tr>
                     <tr>
-                        <td>ID</td>
-                        <td>{{App\Models\Equipo::findOrFail($partido->equipo_id)->nombre}}</td>
+                        <td>EQUIPO LOCAL</td>
+                        <td>{{ App\Models\Equipo::findOrFail($partido->equipo_id)->nombre }}</td>
                     </tr>
-                    {{-- <tr>
-                        <td>NOMBRE</td>
-                        <td>{{$campeonatito->campeonato}}</td>
                     </tr>
                     <tr>
-                        <td>FECHAINICIO</td>
-                        <td>{{$campeonatito->fechainicio->diffForHumans()}}</td>
+                        <td>EQUIPO VISITANTE</td>
+                        <td>{{  App\Models\Equipo::findOrFail($partido->equipo2_id)->nombre }}</td>
                     </tr>
                     <tr>
-                        <td>FECJAFIN</td>
-                        <td>{{$campeonatito->fechafin->diffForHumans()}}</td>
+                        <td>ARBITRO</td>
+                        <td>{{ App\Models\Arbitro::findOrFail($partido->arbitro_id)->persona->nombre }}</td>
+                        </tr>
+                    <tr>
+                        <td>CAMPEONATO</td>
+                        <td>{{ App\Models\Campeonato::findOrFail($partido->campeonato_id)->campeonato }}</td>
                     </tr>
                     <tr>
-                        <td>CATEGORIA</td>
-                        <td>{{$campeonatito->categoria}}</td>
+                        <td>CANCHA</td>
+                        <td>{{ App\Models\Cancha::findOrFail($partido->cancha_id)->nombre }}</td>
                     </tr>
                     <tr>
-                        <td>CREADO</td>
-                        <td>{{$campeonatito->created_at}}</td>
+                        <td>FECHA DEL PARTIDO</td>
+                        <td>{{ $partido->fecha }}</td>
                     </tr>
                     <tr>
-                        <td>ACTUALIZADO</td>
-                        <td>{{$campeonatito->updated_at}}</td>
-                    </tr> --}}
+                        <td>HORA DEL PARTIDO</td>
+                        <td>{{ $partido->hora }}</td>
+                    </tr>
+                    <tr>
+                        <td>GOLES DE {{App\Models\Equipo::findOrFail($partido->equipo_id)->nombre}} </td>
+                        <td>{{ $partido->gol1 }}</td>
+                    </tr>
+                    <tr>
+                        <td>GOLES de  {{App\Models\Equipo::findOrFail($partido->equipo2_id)->nombre}}</td>
+                        <td>{{ $partido->gol2 }}</td>
+                    </tr>
                 </tbody>
             </table>                
         </div>
@@ -75,15 +84,7 @@
                 "language": {
                     "url": "//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json"
                 },
-                "columns":{
-                    data:"id",
-                    data:"nombre",
-                    data:"apellidop",
-                    data:"apellidom",
-                    data:"ci",
-                    data:"expedido",
-                    data:"telefono"
-                }
+               
             });
         });
     </script>
